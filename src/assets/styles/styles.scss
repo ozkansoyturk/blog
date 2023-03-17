@@ -17,8 +17,32 @@
 
 header {
   grid-area: header;
-  background: green;
-  padding: 20px;
+  background: var(--dark);
+  padding: 2rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    color: white;
+  }
+  .header-brand {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+  ul {
+    display: flex;
+    li {
+      .header-nav {
+        font-size: 1.8rem;
+        padding: 0 10px;
+      }
+      .active {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .content {
@@ -28,5 +52,9 @@ header {
 
 footer {
   grid-area: footer;
-  padding: 20px;
+  padding: 2rem;
+  background: var(--dark-grey);
+  font-size: 1.8rem;
+  text-align: center;
+  color: white;
 }

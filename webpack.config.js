@@ -56,5 +56,8 @@ module.exports = {
     watchFiles: ["./src/**"],
     port: 4000,
     hot: true,
+    client: {
+      logging: "none",
+    },
   },
 };

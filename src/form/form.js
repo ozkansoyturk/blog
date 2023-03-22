@@ -5,7 +5,7 @@ const form = document.querySelector("form");
 const errorElement = document.querySelector("#errors");
 let errors = [];
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const formData = new FormData(form);
@@ -14,8 +14,19 @@ form.addEventListener("submit", (event) => {
 
   if (formIsValide(article)) {
     const json = JSON.stringify(article);
-    console.log("json");
-    // fetch
+    try {
+      const response = await fetch("https://restapi.fr/api/test", {
+        method: "POST",
+        body: json,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const body = await response.json();
+      console.log(body);
+    } catch (err) {
+      console.log(err);
+    }
   }
 });
 

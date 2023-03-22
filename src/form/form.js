@@ -24,6 +24,8 @@ form.addEventListener("submit", async (event) => {
       });
       const body = await response.json();
       console.log(body);
+      alert("Votre article est en ligne");
+      formIsSave();
     } catch (err) {
       console.log(err);
     }
@@ -48,4 +50,8 @@ const formIsValide = (article) => {
     errorElement.innerHTML = "";
     return true;
   }
+};
+
+const formIsSave = () => {
+  errorElement.innerHTML = `<li>Article sauvegarder</li>`;
 };

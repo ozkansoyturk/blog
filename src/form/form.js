@@ -10,8 +10,11 @@ form.addEventListener("submit", (event) => {
 
   const formData = new FormData(form);
   const article = Object.fromEntries(formData.entries());
+  console.log(article);
+
   if (formIsValide(article)) {
     const json = JSON.stringify(article);
+    console.log("json");
     // fetch
   }
 });
@@ -29,7 +32,9 @@ const formIsValide = (article) => {
       errorHtml += `<li>${e}</li>`;
     });
     errorElement.innerHTML = errorHtml;
+    return false;
   } else {
     errorElement.innerHTML = "";
+    return true;
   }
 };

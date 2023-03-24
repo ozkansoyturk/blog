@@ -16,7 +16,7 @@ form.addEventListener("submit", async (event) => {
     const json = JSON.stringify(article);
 
     try {
-      const response = await fetch("https://restapi.fr/api/test", {
+      const response = await fetch("https://restapi.fr/api/ok", {
         method: "POST",
         body: json,
         headers: {
@@ -26,6 +26,7 @@ form.addEventListener("submit", async (event) => {
       const body = await response.json();
       console.log(body);
       errorElement.innerHTML = `<li>Article sauvegarder</li>`;
+      errorElement.style.color = "#2ecc71";
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +34,13 @@ form.addEventListener("submit", async (event) => {
 });
 
 const formIsValide = (article) => {
-  if (!article.author || !article.category || !article.content) {
+  if (
+    !article.author ||
+    !article.category ||
+    !article.content ||
+    !article.img ||
+    !article.title
+  ) {
     errors.push("Vous devez renseigner tous les champs");
   } else {
     errors = [];

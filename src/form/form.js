@@ -4,7 +4,37 @@ import "./form.scss";
 const form = document.querySelector("form");
 const errorElement = document.querySelector("#errors");
 const buttonCancel = document.querySelector(".btn-secondary");
+let articleId;
 let errors = [];
+
+const fillForm = (article) => {
+  const author = document.querySelector('input[name="author"]');
+  const img = document.querySelector('input[name="img"]');
+  const title = document.querySelector('input[name="title"]');
+  const category = document.querySelector('input[name="category"]');
+  const content = document.querySelector("textarea");
+  author.value = article.author || "";
+  img.value = article.img || "";
+  title.value = article.title || "";
+  category.value = article.category || "";
+  content.value = article.content || "";
+};
+
+const initForm = async () => {
+  const params = new URL(location.href);
+  articleId = params.searchParams.get("id");
+
+  if (articleId) {
+    const response = await fetch(`https://restapi.fr/api/ok/${articleId}`);
+    if (response.status < 300) {
+      const article = await response.json();
+      fillForm(article);
+      console.log(article);
+    }
+  }
+};
+
+initForm();
 
 buttonCancel.addEventListener("click", (event) => {
   location.assign("/index.html");
@@ -20,13 +50,24 @@ form.addEventListener("submit", async (event) => {
   if (formIsValide(article)) {
     try {
       const json = JSON.stringify(article);
-      const response = await fetch("https://restapi.fr/api/ok", {
-        method: "POST",
-        body: json,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      let response;
+      if (articleId) {
+        response = await fetch(`https://restapi.fr/api/ok/${articleId}`, {
+          method: "PATCH",
+          body: json,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        response = await fetch("https://restapi.fr/api/ok", {
+          method: "POST",
+          body: json,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
       errorElement.innerHTML = `<li>Article sauvegarder</li>`;
       errorElement.style.color = "#2ecc71";
       if (response.status < 299) {

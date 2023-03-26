@@ -45,6 +45,7 @@ form.addEventListener("submit", async (event) => {
 
   const formData = new FormData(form);
   const article = Object.fromEntries(formData.entries());
+
   console.log(article);
 
   if (formIsValide(article)) {
@@ -68,8 +69,10 @@ form.addEventListener("submit", async (event) => {
           },
         });
       }
+
       errorElement.innerHTML = `<li>Article sauvegarder</li>`;
       errorElement.style.color = "#2ecc71";
+
       if (response.status < 299) {
         location.assign("/index.html");
       }

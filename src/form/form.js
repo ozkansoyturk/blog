@@ -29,7 +29,6 @@ const initForm = async () => {
     if (response.status < 300) {
       const article = await response.json();
       fillForm(article);
-      console.log(article);
     }
   }
 };
@@ -45,8 +44,6 @@ form.addEventListener("submit", async (event) => {
 
   const formData = new FormData(form);
   const article = Object.fromEntries(formData.entries());
-
-  console.log(article);
 
   if (formIsValide(article)) {
     try {

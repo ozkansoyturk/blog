@@ -14,14 +14,14 @@ const createModal = (question) => {
   modal = document.createElement("div");
   modal.classList.add("modal");
   modal.innerHTML = `
-  <p>${question}</p>
-  `;
+      <p>${question}</p>
+    `;
   const cancel = document.createElement("button");
-  cancel.innerText = "annuler";
+  cancel.innerText = "Annuler";
   cancel.classList.add("btn", "btn-secondary");
   const confirm = document.createElement("button");
-  confirm.innerText = "confirmer";
   confirm.classList.add("btn", "btn-primary");
+  confirm.innerText = "Confirmer";
   modal.append(cancel, confirm);
 };
 
